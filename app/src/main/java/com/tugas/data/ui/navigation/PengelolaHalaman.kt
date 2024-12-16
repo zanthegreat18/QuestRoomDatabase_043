@@ -12,6 +12,7 @@ import com.tugas.data.ui.view.mahasiswa.DestinasiInsert
 import com.tugas.data.ui.view.mahasiswa.DetailMhsView
 import com.tugas.data.ui.view.mahasiswa.HomeMhsView
 import com.tugas.data.ui.view.mahasiswa.InsertMhsView
+import com.tugas.data.ui.view.mahasiswa.UpdateMhsView
 
 @Composable
 fun PengelolaHalaman(
@@ -79,3 +80,15 @@ fun PengelolaHalaman(
                 }
             )
         ){
+            UpdateMhsView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier
+            )
+        }
+    }
+}
