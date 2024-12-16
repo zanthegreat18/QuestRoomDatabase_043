@@ -3,10 +3,13 @@ package com.tugas.data.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.tugas.data.ui.view.mahasiswa.DestinasiInsert
+import com.tugas.data.ui.view.mahasiswa.DetailMhsView
 import com.tugas.data.ui.view.mahasiswa.HomeMhsView
 import com.tugas.data.ui.view.mahasiswa.InsertMhsView
 
@@ -52,3 +55,19 @@ fun PengelolaHalaman(
                 }
             )
         ){
+            val nim = it.arguments?.getString(DestinasiDetail.NIM)
+            nim?.let { nim ->
+                DetailMhsView(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onEditClick = {
+                        navController.navigate("${DestinasiUpdate.route}/$it")
+                    },
+                    modifier = modifier,
+                    onDeleteClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
