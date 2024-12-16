@@ -44,3 +44,11 @@ fun PengelolaHalaman(
                 },
                 modifier = modifier)
         }
+        composable(
+            DestinasiDetail.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.NIM){
+                    type = NavType.StringType
+                }
+            )
+        ){
