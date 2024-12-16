@@ -181,7 +181,6 @@ fun InsertBodyMhs(
     }
 }
 
-
 object DestinasiInsert : AlamatNavigasi {
     override val route: String = "insert_Mhs"
 }
