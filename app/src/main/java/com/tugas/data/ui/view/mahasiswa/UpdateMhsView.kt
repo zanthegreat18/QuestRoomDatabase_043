@@ -61,8 +61,6 @@ fun UpdateMhsView(
             )
         }
     ){
-
-
             padding ->
         Column (
             modifier = Modifier.fillMaxSize().padding(padding)
