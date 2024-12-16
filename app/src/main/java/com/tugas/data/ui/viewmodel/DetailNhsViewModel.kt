@@ -3,9 +3,6 @@ package com.tugas.data.ui.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pam_pert9.data.entity.Mahasiswa
-import com.example.pam_pert9.repository.RepositoryMhs
-import com.example.pam_pert9.ui.navigation.DestinasiDetail
 import com.tugas.data.data.entity.Mahasiswa
 import com.tugas.data.data.repositori.RepositoriMhs
 import com.tugas.data.ui.navigation.DestinasiDetail

@@ -7,44 +7,49 @@ import com.tugas.data.data.repositori.RepositoriMhs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-
-
-data class HomeUIState (
-    val listMhs: List<Mahasiswa> = listOf(),
-    val isLoading: Boolean = false,
-    val isError: Boolean = false,
-    val errorMessage: String = ""
-)
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 
 class HomeMhsViewModel(
     private val repositoriMhs: RepositoriMhs
-) : ViewModel(){
-
-    val homeUiState: StateFlow<HomeUIState> = repositoriMhs.getAllMhs()
+): ViewModel() {
+    val homeUiState: StateFlow<HomeUiState> = repositoriMhs.getAllMhs()
         .filterNotNull()
         .map {
-            HomeUIState(
+            HomeUiState(
                 listMhs = it.toList(),
                 isLoading = false,
             )
         }
         .onStart {
-            emit(HomeUIState(isLoading = true))
+            emit(HomeUiState(isLoading = true))
             delay(900)
         }
         .catch {
             emit(
-                HomeUIState(
+                HomeUiState(
                     isLoading = false,
                     isError = true,
                     errorMessage = it.message ?: "Terjadi Kesalahan"
                 )
             )
         }
-        .statein(
+        .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeUIState(
-                isLoading = true)
+            initialValue = HomeUiState(
+                isLoading = true,
+            )
         )
 }
+
+// state; mengubah tampilan
+data class HomeUiState(
+    val listMhs: List<Mahasiswa> = listOf(),
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
+    val errorMessage: String = ""
+)
